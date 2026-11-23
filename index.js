@@ -3075,13 +3075,13 @@ app.use((err, req, res, next) => {
     console.error("❌ Error:", err);
     res.status(500).json({ success: false, message: err.message });
 });
-
 // ---------------------- START ----------------------
 const PORT = process.env.PORT || 80;
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server Running Smoothly on port ${PORT}`);
-    console.log(
-        `☁️  Cloudinary: ${process.env.CLOUDINARY_CLOUD_NAME ? "✅ Configured" : "❌ NOT SET"}`,
-    );
-});
+if (process.env.NODE_ENV !== "production") {
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`🚀 Server Running Smoothly on port ${PORT}`);
+    });
+}
+
+export default app;
